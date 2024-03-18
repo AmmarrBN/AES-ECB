@@ -21,4 +21,4 @@ Before
     <img src="https://telegra.ph/file/f0dd3d5ec88441b0e53a7.jpg"></p>
 After
 <p align="center">
-    <img src="https://telegra.ph/file/69a01ff8335ae604bc72d.jpg"></p>
+    <img src="https://telegra.ph/file/8d929408afa48cfb31ffe.jpg"></p>
