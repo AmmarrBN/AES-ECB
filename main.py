@@ -1,32 +1,38 @@
 # Ngapain bang? Minimal Credit cuihh
 # Copyright 2024 ©AmmarBN
 # https://github.com/AmmarrBN/AES-ECB
+# Recode? Credit pls
 
 import os,sys
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 import base64
 import random
+import marshal
 
 def encrypt_code(code, key):
-    watermark = "Made By AmmarBN"
+    watermark = "AmmarBN"
     # Add watermark to the code before encryption
     code_with_watermark = f"{code}\n# Watermark: {watermark}"
+    # Compile the code into a code object
+    compiled_code = compile(code_with_watermark, '<string>', 'exec')
+    # Convert the compiled code into bytecode
+    bytecode = marshal.dumps(compiled_code)
     cipher = AES.new(key, AES.MODE_ECB)
-    padded_code = pad(code_with_watermark.encode(), AES.block_size)
-    encrypted_code = cipher.encrypt(padded_code)
-    return base64.b64encode(encrypted_code).decode('utf-8')
+    padded_bytecode = pad(bytecode, AES.block_size)
+    encrypted_bytecode = cipher.encrypt(padded_bytecode)
+    return base64.b64encode(encrypted_bytecode).decode('utf-8')
 
 def encrypt_message(message, key):
     cipher = AES.new(key, AES.MODE_ECB)
     padded_message = pad(message.encode(), AES.block_size)
     encrypted_message = cipher.encrypt(padded_message)
-    return encrypted_message
+    return base64.b64encode(encrypted_message).decode('utf-8')
 
-def decrypt_message(encrypted_message, key):
-    cipher = AES.new(key, AES.MODE_ECB)
-    decrypted_message = cipher.decrypt(encrypted_message)
-    return unpad(decrypted_message, AES.block_size).decode('utf-8')
+def obfuscate_code(code):
+    # Example obfuscation technique: replace all occurrences of 'exec' with 'x_x_e_c'
+    obfuscated_code = code.replace('exec', 'x_x_e_c')
+    return obfuscated_code
 
 def banner():
     print ("""
@@ -56,30 +62,47 @@ def main():
     # Generate random 16-byte key
     key = bytes([random.randint(0, 255) for _ in range(16)])
     
+    # Obfuscate source code
+    obfuscated_code = obfuscate_code(code)
+    
     # Encrypt source code
-    encrypted_code = encrypt_code(code, key)
+    encrypted_code = encrypt_code(obfuscated_code, key)
     
     # Encrypt access denied message
     access_denied_message = "Cannot run: Credit has been removed, access denied"
     encrypted_message = encrypt_message(access_denied_message, key)
 
     # Define variable c
-    c = base64.b64encode('Made By AmmarBN'.encode()).decode('utf-8')
+    c = base64.b64encode('AmmarBN'.encode()).decode('utf-8')
     
     output_file = input_file.split('.')[0] + "_encrypted.py"
 
     with open(output_file, 'w') as file:
         file.write(f"import base64\n")
+        file.write(f"aes_ebc=(")
+        for _ in range(3000):
+           file.write('"404 Not Found","404 Not Found","404 Not Found","404 Not Found","404 Not Found",\n')
+        file.write(")\n")
         file.write(f"from Crypto.Cipher import AES\n")
         file.write(f"from Crypto.Util.Padding import unpad\n")
         file.write(f"import sys\n")
+        file.write(f"import marshal\n")
         file.write(f"key = {key}\n")
+        file.write(f"aes_ebc2=(")
+        for _ in range(3000):
+           file.write('"Your Wellcome","Your Wellcome","Your Wellcome","Your Wellcome","Your Wellcome",\n')
+        file.write(")\n")
         file.write(f"cipher = AES.new(key, AES.MODE_ECB)\n")
         file.write(f"encrypted_code = base64.b64decode('{encrypted_code}')\n")
-        file.write(f"decrypted_code = unpad(cipher.decrypt(encrypted_code), AES.block_size).decode('utf-8')\n")
-        file.write(f"run_code = lambda c: exec(decrypted_code, globals()) if base64.b64decode('{c}').decode('utf-8') == 'Made By AmmarBN' else sys.exit(decrypt_message(base64.b64decode('{base64.b64encode(encrypted_message).decode()}'), key))\n")
+        file.write(f"decrypted_bytecode = unpad(cipher.decrypt(encrypted_code), AES.block_size)\n")
+        file.write(f"compiled_code = marshal.loads(decrypted_bytecode)\n")
+        file.write(f"x_x_e_c = exec\n")  # Define 'exec' with obfuscated name
+        file.write(f"x_x_e_v = '{c}'\n")  # Define 'c' with obfuscated name
+        file.write(f"run_code = lambda: x_x_e_c(compiled_code, globals())\n")  # Define lambda function
         file.write(f"try:\n")
-        file.write(f"    run_code('{c}')\n")
+        file.write(f"    if base64.b64decode(x_x_e_v.encode()).decode('utf-8') != 'AmmarBN':\n")
+        file.write(f"        raise Exception('Cannot run: Credit has been removed, access denied')\n")
+        file.write(f"    run_code()\n")  # Execute lambda function
         file.write(f"except Exception as e:\n")
         file.write(f"    print('Error during execution:', e)\n")
         file.write(f"    sys.exit(1)\n")
