@@ -12,3 +12,5 @@ python main.py
 ```
 
 # Preview 
+<p align="center">
+    <img src="https://i.ibb.co/S64xkVB/20220126-152502.jpg"></p>
