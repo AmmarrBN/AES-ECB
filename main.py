@@ -34,6 +34,17 @@ def obfuscate_code(code):
     obfuscated_code = code.replace('exec', 'x_x_e_c')
     return obfuscated_code
 
+def clear_terminal():
+    # Untuk Windows
+    if os.name == 'nt':
+        _ = os.system('cls')
+    # Untuk MacOS dan Linux
+    else:
+        _ = os.system('clear')
+
+# Panggil fungsi clear_terminal() untuk membersihkan terminal
+# clear_terminal()
+
 def banner():
     print ("""
 
@@ -48,7 +59,7 @@ def banner():
 """)
 
 def main():
-    os.system("clear")
+    clear_terminal()
     banner()
     input_file = input(" • Enter File Name (exam:main.py): ")
 
