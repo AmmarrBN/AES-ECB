@@ -118,7 +118,7 @@ def main():
         file.write(f"    print('Error during execution:', e)\n")
         file.write(f"    sys.exit(1)\n")
         file.write(f"fucked=(")
-        for _ in range(3000):
+        for _ in range(9000):
            file.write('"😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜",\n')
         file.write(")\n")
 
