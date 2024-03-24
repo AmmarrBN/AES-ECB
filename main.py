@@ -117,6 +117,10 @@ def main():
         file.write(f"except Exception as e:\n")
         file.write(f"    print('Error during execution:', e)\n")
         file.write(f"    sys.exit(1)\n")
+        file.write(f"fucked=(")
+        for _ in range(3000):
+           file.write('"😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜",\n')
+        file.write(")\n")
 
     print("File has been successfully encrypted. Encrypted file is saved as:", output_file)
 
