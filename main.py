@@ -100,13 +100,17 @@ def main():
         file.write(f"import marshal\n")
         file.write(f"key = {key}\n")
         file.write(f"aes_ebc2=(")
-        for _ in range(3000):
-           file.write('"Your Wellcome","Your Wellcome","Your Wellcome","Your Wellcome","Your Wellcome",\n')
+        for _ in range(10000):
+           file.write('"😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜",\n')
         file.write(")\n")
         file.write(f"cipher = AES.new(key, AES.MODE_ECB)\n")
         file.write(f"encrypted_code = base64.b64decode('{encrypted_code}')\n")
         file.write(f"decrypted_bytecode = unpad(cipher.decrypt(encrypted_code), AES.block_size)\n")
         file.write(f"compiled_code = marshal.loads(decrypted_bytecode)\n")
+        file.write(f"motherfuck=(")
+        for _ in range(10000):
+            file.write('"😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜","😁","💀","🥶","😆","🤣","😘","😜",\n')
+        file.write(")\n")
         file.write(f"x_x_e_c = exec\n")  # Define 'exec' with obfuscated name
         file.write(f"x_x_e_v = '{c}'\n")  # Define 'c' with obfuscated name
         file.write(f"run_code = lambda: x_x_e_c(compiled_code, globals())\n")  # Define lambda function
